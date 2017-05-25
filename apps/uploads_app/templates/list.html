@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="static/uploads_app/css/style.css">
+
+        <title>Upload Page</title>
+    </head>
+
+    <body>
+        <!-- List of uploaded documents -->
+        <a href="{% url 'login_and_registration_app:update_account_info' %}">Update Account Info</a>
+        <a href="#">Videos</a>
+        <a href="#">PlaceHolder1</a>
+        <a href="#">PlaceHolder2</a>
+        <a href="#">PlaceHolder3</a>
+
+        <table style="width:100%">
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+          </tr>
+
+          {% if documents %}
+
+              {% for document in documents %}
+              <tr>
+                  <td><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a> </td>
+                  <td>{{document.created_at}}</td>
+              </tr>
+              {% endfor %}
+
+          {% else %}
+              <p>No documents.</p>
+          {% endif %}
+        </table>
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'uploads_app:list' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+            </p>
+
+            <p><input type="submit" value="Upload"/></p>
+        </form>
+
+    </body>
+
+</html>
