@@ -16,5 +16,6 @@ class Document(models.Model):
     docfile = models.FileField(upload_to=get_upload_path)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    viewed = models.CharField(max_length= 75, default="NEW")
     def __unicode__(self):
         return self.docfile.url

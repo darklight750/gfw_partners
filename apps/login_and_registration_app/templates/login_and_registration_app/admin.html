@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body>
-	      {% load staticfiles %}
+    {% load staticfiles %}
 
 	<img src="logos.jpg" style="width:100%">
     <h1 class="bg-primary">Welcome, Admin</h1>
@@ -25,6 +25,14 @@
             {% for doc in user.document_set.all %}
             <tr>
                 <td><a href="{{ doc.docfile.url }}">{{ doc.docfile.name }}</a> </td>
+                <td><video width="400" controls>
+                  <source src="{{ doc.docfile.url }}" type="video/mp4">
+                </video>/<td>
+
+                <td><select>
+                  <option value="NEW">NEW</option>
+                  <option value="VIEWED">VIEWED</option>
+                </select></td>
             </tr>
             {% endfor %}
           {% endif %}
