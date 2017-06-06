@@ -57,7 +57,25 @@ def login(request):
             return redirect('/')
 
     update_login_session(data,request)
+    context = {
+        'users': User.objects.all()
 
+
+    }
+    '''a = User.objects.all()
+    for user in a:
+        context[user] = []
+        context['keys'].append(user)
+        b = user.document_set.all()
+        for doc in b:
+            context[user].append(doc)
+    print context'''
+
+    for user in context['users']:
+        for doc in user.document_set.all():
+            print doc, 1
+    if data.email == 'admin@admin.com':
+        return render(request, 'login_and_registration_app/admin.html', context)
 
     return redirect('uploads_app:list')
 

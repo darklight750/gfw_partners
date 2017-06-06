@@ -159,5 +159,7 @@ class User(models.Model):
     birthday = models.DateField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    def __unicode__(self):
+        return self.email
 
     objects = UserManager()
