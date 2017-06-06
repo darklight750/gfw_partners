@@ -12,6 +12,8 @@
     </head>
 
     <body>
+	        {% load staticfiles %}
+
 		<img src="logos.jpg" style="width:100%">
         <!-- List of uploaded documents -->
         <a href="{% url 'login_and_registration_app:update_account_info' %}" type="button" class="btn btn-default">Update Account Info</a>
