@@ -108,20 +108,9 @@ class UserManager(models.Manager):
 
         # Create list to hold errors
         errors = []
-        replicated = User.objects.filter(email=data['email'])
 
         # Check for blank fields
-        if len(data['email']) < 1:
-            print "Email cannot be blank"
-            errors.append("Email cannot be blank")
 
-        if not EMAIL_REGEX.match(data['email']):
-            print "Email is not valid"
-            errors.append("Email is not valid")
-
-        if len(replicated) > 0:
-            print "Email has already been registered"
-            errors.append("Email has already been registered")
 
         if len(data['password']) < 8:
             print "Password must be at least 8 characters long"
@@ -138,7 +127,6 @@ class UserManager(models.Manager):
             hashed_pw = bcrypt.hashpw(pw.encode(), bcrypt.gensalt())
 
             user = User.objects.get(id=user_id)
-            user.email = data['email']
             user.password = hashed_pw
             user.confirm_password = data['confirm_password']
             user.save()
